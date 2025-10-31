@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Index = () => {
   const features = [
@@ -36,6 +36,18 @@ const Index = () => {
   ];
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [activeUsers, setActiveUsers] = useState(1247);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveUsers(prev => {
+        const change = Math.floor(Math.random() * 7) - 3;
+        const newValue = prev + change;
+        return Math.max(1200, Math.min(1300, newValue));
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleBuyClick = () => {
     window.open('https://t.me/Ebashygeroinss', '_blank');
@@ -66,6 +78,55 @@ const Index = () => {
             <Icon name="ShoppingCart" className="mr-2" size={28} />
             КУПИТЬ ЧИТ
           </Button>
+          
+          <div className="mt-8 inline-flex items-center gap-3 px-6 py-3 bg-card/50 backdrop-blur border border-primary/30 rounded-full">
+            <div className="relative">
+              <div className="w-3 h-3 bg-accent rounded-full animate-pulse-glow"></div>
+              <div className="absolute inset-0 w-3 h-3 bg-accent rounded-full animate-ping"></div>
+            </div>
+            <span className="text-muted-foreground">Сейчас онлайн:</span>
+            <span className="text-2xl font-bold text-accent">{activeUsers}</span>
+            <span className="text-muted-foreground">игроков</span>
+          </div>
+        </div>
+
+        <div className="mb-20 animate-slide-up">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 glow-text">
+            ПОЧЕМУ МЫ?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="p-6 bg-card/50 backdrop-blur border-2 border-primary/30 text-center hover:border-primary transition-all duration-300 hover:scale-105">
+              <div className="mb-4">
+                <Icon name="Users" size={48} className="mx-auto text-primary" />
+              </div>
+              <div className="text-4xl font-bold text-accent mb-2">5000+</div>
+              <p className="text-muted-foreground">Активных пользователей</p>
+            </Card>
+            
+            <Card className="p-6 bg-card/50 backdrop-blur border-2 border-accent/30 text-center hover:border-accent transition-all duration-300 hover:scale-105">
+              <div className="mb-4">
+                <Icon name="Clock" size={48} className="mx-auto text-accent" />
+              </div>
+              <div className="text-4xl font-bold text-primary mb-2">24/7</div>
+              <p className="text-muted-foreground">Техподдержка онлайн</p>
+            </Card>
+            
+            <Card className="p-6 bg-card/50 backdrop-blur border-2 border-secondary/30 text-center hover:border-secondary transition-all duration-300 hover:scale-105">
+              <div className="mb-4">
+                <Icon name="ShieldCheck" size={48} className="mx-auto text-secondary" />
+              </div>
+              <div className="text-4xl font-bold text-accent mb-2">99.8%</div>
+              <p className="text-muted-foreground">Без банов</p>
+            </Card>
+            
+            <Card className="p-6 bg-card/50 backdrop-blur border-2 border-primary/30 text-center hover:border-primary transition-all duration-300 hover:scale-105">
+              <div className="mb-4">
+                <Icon name="Zap" size={48} className="mx-auto text-primary" />
+              </div>
+              <div className="text-4xl font-bold text-secondary mb-2">&lt;5 мин</div>
+              <p className="text-muted-foreground">Установка и запуск</p>
+            </Card>
+          </div>
         </div>
 
         <div className="mb-20 animate-slide-up">
