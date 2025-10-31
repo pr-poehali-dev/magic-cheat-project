@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useState } from "react";
 
 const Index = () => {
   const features = [
@@ -23,6 +25,17 @@ const Index = () => {
     { name: "Дмитрий", rating: 5, text: "Просто огонь! Все работает четко, поддержка на высоте" },
     { name: "Максим", rating: 5, text: "Купил на день, теперь беру на месяц. Рекомендую!" },
   ];
+
+  const faqs = [
+    { q: "Безопасно ли использовать чит?", a: "Да! Наш чит использует продвинутые методы защиты от античитов. Тысячи пользователей играют без банов уже месяцами." },
+    { q: "Как быстро я получу доступ?", a: "Моментально! После оплаты вы получите инструкции по установке в Telegram в течение 1-2 минут." },
+    { q: "Работает ли на всех версиях игры?", a: "Да, чит автоматически обновляется под новые патчи игры. Вы всегда получаете актуальную версию." },
+    { q: "Можно ли использовать на нескольких ПК?", a: "Нет, лицензия привязывается к одному компьютеру для безопасности. Но можно перепривязать при необходимости." },
+    { q: "Что делать если возникли проблемы?", a: "Пишите в наш Telegram @Ebashygeroinss - техподдержка отвечает круглосуточно и решает любые вопросы за 10-15 минут." },
+    { q: "Есть ли возврат средств?", a: "Да, если чит не работает по техническим причинам на вашем ПК - полный возврат в течение 24 часов." },
+  ];
+
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleBuyClick = () => {
     window.open('https://t.me/Ebashygeroinss', '_blank');
@@ -145,6 +158,67 @@ const Index = () => {
                 </Button>
               </div>
             </Card>
+          </div>
+        </div>
+
+        <div className="mb-20 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 glow-text">
+            ВИДЕО-ДЕМО
+          </h2>
+          <Card className="max-w-4xl mx-auto overflow-hidden bg-card/50 backdrop-blur border-2 border-primary/30 hover:border-accent transition-all duration-300">
+            <div className="relative aspect-video bg-gradient-to-br from-background to-card flex items-center justify-center group cursor-pointer" onClick={() => setIsPlaying(!isPlaying)}>
+              {!isPlaying ? (
+                <div className="text-center">
+                  <div className="mb-6 relative inline-block">
+                    <div className="absolute inset-0 bg-primary/20 blur-3xl animate-pulse-glow"></div>
+                    <div className="relative bg-gradient-to-br from-primary to-accent p-8 rounded-full glow-effect group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="Play" size={64} className="text-background" />
+                    </div>
+                  </div>
+                  <p className="text-2xl font-bold text-primary">Смотреть демонстрацию</p>
+                  <p className="text-muted-foreground mt-2">2:30 мин • Все функции в действии</p>
+                </div>
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <Icon name="Video" size={80} className="mx-auto mb-4 text-primary animate-pulse" />
+                    <p className="text-xl text-muted-foreground">Свяжитесь с нами в Telegram</p>
+                    <p className="text-lg text-muted-foreground mt-2">чтобы получить полную демонстрацию</p>
+                    <Button onClick={handleBuyClick} className="mt-6 bg-gradient-to-r from-primary to-accent" size="lg">
+                      <Icon name="MessageCircle" className="mr-2" size={20} />
+                      Открыть Telegram
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </Card>
+        </div>
+
+        <div className="mb-20 animate-slide-up">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 glow-text">
+            ЧАСТЫЕ ВОПРОСЫ
+          </h2>
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-4">
+              {faqs.map((faq, index) => (
+                <AccordionItem 
+                  key={index} 
+                  value={`item-${index}`}
+                  className="border-2 border-primary/30 rounded-lg px-6 bg-card/50 backdrop-blur hover:border-primary transition-all duration-300"
+                >
+                  <AccordionTrigger className="text-left text-lg font-bold text-foreground hover:text-primary hover:no-underline">
+                    <div className="flex items-center gap-3">
+                      <Icon name="HelpCircle" size={24} className="text-accent flex-shrink-0" />
+                      <span>{faq.q}</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pl-9">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
 
