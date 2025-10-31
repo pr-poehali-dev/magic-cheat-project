@@ -12,6 +12,12 @@ const Index = () => {
     { icon: "Crosshair", title: "No Recoil", desc: "Стрельба без отдачи" },
   ];
 
+  const screenshots = [
+    { url: "https://cdn.poehali.dev/projects/66514dd7-f386-471c-9f56-46cccfe24e4c/files/2e162d9e-64b7-417e-ace7-4f7b8f79e088.jpg", title: "Aimbot Interface" },
+    { url: "https://cdn.poehali.dev/projects/66514dd7-f386-471c-9f56-46cccfe24e4c/files/a5b34875-1987-4bd2-b252-c0ca4f802010.jpg", title: "ESP Wallhack" },
+    { url: "https://cdn.poehali.dev/projects/66514dd7-f386-471c-9f56-46cccfe24e4c/files/eeffc807-76c3-41db-a41e-5ac72aa706da.jpg", title: "Radar System" },
+  ];
+
   const reviews = [
     { name: "Артём", rating: 5, text: "Лучший чит! Пользуюсь уже месяц, никаких банов" },
     { name: "Дмитрий", rating: 5, text: "Просто огонь! Все работает четко, поддержка на высоте" },
@@ -66,6 +72,33 @@ const Index = () => {
                   <div>
                     <h3 className="text-xl font-bold mb-2 text-primary">{feature.title}</h3>
                     <p className="text-muted-foreground">{feature.desc}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-20 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 glow-text">
+            ДЕМОНСТРАЦИЯ
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {screenshots.map((screenshot, index) => (
+              <Card 
+                key={index}
+                className="overflow-hidden bg-card/50 backdrop-blur border-2 border-primary/30 hover:border-accent transition-all duration-300 hover:scale-105 hover:glow-effect cursor-pointer group"
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <img 
+                    src={screenshot.url} 
+                    alt={screenshot.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                    <div className="p-4 w-full">
+                      <h3 className="text-lg font-bold text-primary">{screenshot.title}</h3>
+                    </div>
                   </div>
                 </div>
               </Card>
